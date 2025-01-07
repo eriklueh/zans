@@ -190,7 +190,7 @@ export function AppSidebar({ dict, ...props }: AppSidebarProps) {
         <NavProjects projects={data.projects} dict={dict} />
       </SidebarContent>
       <SidebarFooter>
-        <NavUser user={data.user} dict={dict} />
+        <NavUser dict={dict} />
       </SidebarFooter>
       <SidebarRail />
     </Sidebar>

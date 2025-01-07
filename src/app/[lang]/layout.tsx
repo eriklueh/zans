@@ -1,3 +1,5 @@
+import { UserProvider } from '@auth0/nextjs-auth0/client';
+
 export default function LangLayout({
                                        children,
                                        params: { lang },
@@ -6,9 +8,9 @@ export default function LangLayout({
     params: { lang: string }
 }) {
     return (
-        <>
+        <UserProvider>
             {children}
-        </>
+        </UserProvider>
     )
 }
 

@@ -1,5 +1,6 @@
 "use client"
 
+import { useUser } from '@auth0/nextjs-auth0/client';
 import { BadgeCheck, Bell, ChevronsUpDown, CreditCard, LogOut, Sparkles } from 'lucide-react'
 
 import {
@@ -23,17 +24,16 @@ import {
   useSidebar,
 } from "@/components/ui/sidebar"
 
-interface NavUserProps {
-  user: {
-    name: string
-    email: string
-    avatar: string
-  }
-  dict: Record<string, string>
-}
-
-export function NavUser({ user, dict }: NavUserProps) {
+export function NavUser({ dict }: { dict: Record<string, string> }) {
+  const { user } = useUser();
   const { isMobile } = useSidebar()
+
+  // Obtener el idioma actual de la URL
+  const lang = typeof window !== 'undefined' 
+    ? window.location.pathname.split('/')[1] 
+    : 'es';
+
+  if (!user) return null;
 
   return (
     <SidebarMenu>
@@ -45,8 +45,10 @@ export function NavUser({ user, dict }: NavUserProps) {
               className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
             >
               <Avatar className="h-8 w-8 rounded-lg">
-                <AvatarImage src={user.avatar} alt={user.name} />
-                <AvatarFallback className="rounded-lg">CN</AvatarFallback>
+                <AvatarImage src={user.picture || ''} alt={user.name || ''} />
+                <AvatarFallback className="rounded-lg">
+                  {user.name?.substring(0, 2).toUpperCase()}
+                </AvatarFallback>
               </Avatar>
               <div className="grid flex-1 text-left text-sm leading-tight">
                 <span className="truncate font-semibold">{user.name}</span>
@@ -64,8 +66,10 @@ export function NavUser({ user, dict }: NavUserProps) {
             <DropdownMenuLabel className="p-0 font-normal">
               <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
                 <Avatar className="h-8 w-8 rounded-lg">
-                  <AvatarImage src={user.avatar} alt={user.name} />
-                  <AvatarFallback className="rounded-lg">CN</AvatarFallback>
+                  <AvatarImage src={user.picture || ''} alt={user.name || ''} />
+                  <AvatarFallback className="rounded-lg">
+                    {user.name?.substring(0, 2).toUpperCase()}
+                  </AvatarFallback>
                 </Avatar>
                 <div className="grid flex-1 text-left text-sm leading-tight">
                   <span className="truncate font-semibold">{user.name}</span>
@@ -98,7 +102,7 @@ export function NavUser({ user, dict }: NavUserProps) {
             <DropdownMenuSeparator />
             <DropdownMenuItem>
               <LogOut />
-              {dict.logout}
+              <a href={`/api/auth/logout?returnTo=/${lang}`}>{dict.logout}</a>
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
