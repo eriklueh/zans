@@ -1,18 +1,7 @@
 "use client"
 
 import * as React from "react"
-import {
-  AudioWaveform,
-  BookOpen,
-  Bot,
-  Command,
-  Frame,
-  GalleryVerticalEnd,
-  Map,
-  PieChart,
-  Settings2,
-  SquareTerminal,
-} from "lucide-react"
+import { AudioWaveform, BookOpen, Bot, Command, Frame, GalleryVerticalEnd, Map, PieChart, Settings2, SquareTerminal } from 'lucide-react'
 
 import { NavMain } from "@/components/nav-main"
 import { NavProjects } from "@/components/nav-projects"
@@ -25,6 +14,40 @@ import {
   SidebarHeader,
   SidebarRail,
 } from "@/components/ui/sidebar"
+
+interface AppSidebarProps extends React.ComponentProps<typeof Sidebar> {
+  dict: {
+    platform: string
+    projects: string
+    playground: string
+    history: string
+    starred: string
+    settings: string
+    models: string
+    genesis: string
+    explorer: string
+    quantum: string
+    documentation: string
+    introduction: string
+    getStarted: string
+    tutorials: string
+    changelog: string
+    general: string
+    team: string
+    billing: string
+    limits: string
+    more: string
+    viewProject: string
+    shareProject: string
+    deleteProject: string
+    upgradeProTitle: string
+    account: string
+    notifications: string
+    logout: string
+    addTeam: string
+    teamsLabel: string
+  }
+}
 
 // This is sample data.
 const data = {
@@ -52,86 +75,86 @@ const data = {
   ],
   navMain: [
     {
-      title: "Playground",
+      title: "playground",
       url: "#",
       icon: SquareTerminal,
       isActive: true,
       items: [
         {
-          title: "History",
+          title: "history",
           url: "#",
         },
         {
-          title: "Starred",
+          title: "starred",
           url: "#",
         },
         {
-          title: "Settings",
+          title: "settings",
           url: "#",
         },
       ],
     },
     {
-      title: "Models",
+      title: "models",
       url: "#",
       icon: Bot,
       items: [
         {
-          title: "Genesis",
+          title: "genesis",
           url: "#",
         },
         {
-          title: "Explorer",
+          title: "explorer",
           url: "#",
         },
         {
-          title: "Quantum",
+          title: "quantum",
           url: "#",
         },
       ],
     },
     {
-      title: "Documentation",
+      title: "documentation",
       url: "#",
       icon: BookOpen,
       items: [
         {
-          title: "Introduction",
+          title: "introduction",
           url: "#",
         },
         {
-          title: "Get Started",
+          title: "getStarted",
           url: "#",
         },
         {
-          title: "Tutorials",
+          title: "tutorials",
           url: "#",
         },
         {
-          title: "Changelog",
+          title: "changelog",
           url: "#",
         },
       ],
     },
     {
-      title: "Settings",
+      title: "settings",
       url: "#",
       icon: Settings2,
       items: [
         {
-          title: "General",
+          title: "general",
           url: "#",
         },
         {
-          title: "Team",
+          title: "team",
           url: "#",
         },
         {
-          title: "Billing",
+          title: "billing",
           url: "#",
         },
         {
-          title: "Limits",
+          title: "limits",
           url: "#",
         },
       ],
@@ -156,18 +179,18 @@ const data = {
   ],
 }
 
-export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+export function AppSidebar({ dict, ...props }: AppSidebarProps) {
   return (
     <Sidebar collapsible="icon" {...props}>
       <SidebarHeader>
-        <TeamSwitcher teams={data.teams} />
+        <TeamSwitcher teams={data.teams} dict={dict} />
       </SidebarHeader>
       <SidebarContent>
-        <NavMain items={data.navMain} />
-        <NavProjects projects={data.projects} />
+        <NavMain items={data.navMain} dict={dict} />
+        <NavProjects projects={data.projects} dict={dict} />
       </SidebarContent>
       <SidebarFooter>
-        <NavUser user={data.user} />
+        <NavUser user={data.user} dict={dict} />
       </SidebarFooter>
       <SidebarRail />
     </Sidebar>
