@@ -4,19 +4,23 @@ import { Bar, BarChart, CartesianGrid, XAxis, YAxis } from 'recharts'
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart"
 import { useDashboardStore } from "@/store/dashboard-store"
 
-const chartConfig = {
-  visits: {
-    label: 'Visitas',
-    color: 'hsl(var(--primary))',
-  },
+interface VisitorsChartProps {
+  dict: {
+    visits: string
+  }
 }
 
-export function VisitorsChart() {
+export function VisitorsChart({ dict }: VisitorsChartProps) {
   const { trafficStats } = useDashboardStore()
 
   return (
     <ChartContainer
-      config={chartConfig}
+      config={{
+        visits: {
+          label: dict.visits,
+          color: 'hsl(var(--primary))',
+        },
+      }}
     >
       <BarChart
         data={trafficStats.browsers}

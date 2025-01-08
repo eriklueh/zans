@@ -31,6 +31,36 @@
   "notifications": "Notificaciones",
   "logout": "Cerrar Sesión",
   "addTeam": "Agregar Equipo",
-  "teamsLabel": "Equipos"
+  "teamsLabel": "Equipos",
+  "charts": {
+    "users": {
+      "title": "Usuarios",
+      "totalUsers": "Usuarios Totales",
+      "activeUsers": "Usuarios Activos",
+      "newTotalUsers": "Nuevos Usuarios Totales",
+      "updateChart": "Actualizar Gráfico",
+      "currentState": "Estado Actual",
+      "lastMonthData": "Datos del Último Mes"
+    },
+    "visitors": {
+      "title": "Visitantes por Navegador",
+      "visits": "visitas"
+    },
+    "projects": {
+      "title": "Estado de Proyectos",
+      "period": "Último Mes",
+      "completed": "Completados",
+      "inProgress": "En Progreso",
+      "planning": "Planificación",
+      "onHold": "En Espera",
+      "cancelled": "Cancelados",
+      "trend": "+12.3% desde el mes pasado",
+      "description": "Mejora en la finalización de proyectos"
+    },
+    "zustandDemo": {
+      "title": "Demo de Zustand",
+      "description": "Actualiza los datos del gráfico de usuarios para ver la reactividad en acción"
+    }
+  }
 }
 

@@ -29,6 +29,36 @@
   "addTeam": "Add Team",
   "teamsLabel": "Teams",
   "buildingYourApp": "Building Your App",
-  "dataFetching": "Data Fetching"
+  "dataFetching": "Data Fetching",
+  "charts": {
+    "users": {
+      "title": "Users",
+      "totalUsers": "Total Users",
+      "activeUsers": "Active Users",
+      "newTotalUsers": "New Total Users",
+      "updateChart": "Update Chart",
+      "currentState": "Current State",
+      "lastMonthData": "Last Month Data"
+    },
+    "visitors": {
+      "title": "Visitors by Browser",
+      "visits": "visits"
+    },
+    "projects": {
+      "title": "Project Status",
+      "period": "Last Month",
+      "completed": "Completed",
+      "inProgress": "In Progress",
+      "planning": "Planning",
+      "onHold": "On Hold",
+      "cancelled": "Cancelled",
+      "trend": "+12.3% from last month",
+      "description": "Improvement in project completion"
+    },
+    "zustandDemo": {
+      "title": "Zustand Demo",
+      "description": "Update user chart data to see reactivity in action"
+    }
+  }
 }
 

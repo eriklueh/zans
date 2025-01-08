@@ -17,38 +17,52 @@ const chartData = [
   { status: "cancelled", count: 8, fill: "hsl(var(--chart-5))" },
 ]
 
-const chartConfig = {
-  count: {
-    label: "Projects",
-  },
-  completed: {
-    label: "Completados",
-    color: "hsl(var(--chart-1))",
-  },
-  inProgress: {
-    label: "En Progreso",
-    color: "hsl(var(--chart-2))",
-  },
-  planning: {
-    label: "Planificación",
-    color: "hsl(var(--chart-3))",
-  },
-  onHold: {
-    label: "En Espera",
-    color: "hsl(var(--chart-4))",
-  },
-  cancelled: {
-    label: "Cancelados",
-    color: "hsl(var(--chart-5))",
-  },
-} satisfies ChartConfig
+interface ProjectsChartProps {
+  dict: {
+    title: string
+    period: string
+    completed: string
+    inProgress: string
+    planning: string
+    onHold: string
+    cancelled: string
+    trend: string
+    description: string
+  }
+}
 
-export function ProjectsChart() {
+export function ProjectsChart({ dict }: ProjectsChartProps) {
+  const chartConfig = {
+    count: {
+      label: "Projects",
+    },
+    completed: {
+      label: dict.completed,
+      color: "hsl(var(--chart-1))",
+    },
+    inProgress: {
+      label: dict.inProgress,
+      color: "hsl(var(--chart-2))",
+    },
+    planning: {
+      label: dict.planning,
+      color: "hsl(var(--chart-3))",
+    },
+    onHold: {
+      label: dict.onHold,
+      color: "hsl(var(--chart-4))",
+    },
+    cancelled: {
+      label: dict.cancelled,
+      color: "hsl(var(--chart-5))",
+    },
+  } satisfies ChartConfig
+
   return (
     <div className="flex flex-col rounded-lg border bg-card p-4 shadow-sm">
       <div className="flex flex-col items-center pb-4">
-        <h3 className="text-lg font-semibold">Estado de Proyectos</h3>
-        <p className="text-sm text-muted-foreground">Último mes</p>
+        <h3 className="text-lg font-semibold">{dict.title}</h3>
+        <p className="text-sm text-muted-foreground">{dict.period}</p>
       </div>
       <div className="flex-1 pb-4">
         <ChartContainer
@@ -67,10 +81,10 @@ export function ProjectsChart() {
       </div>
       <div className="flex flex-col gap-2 text-sm">
         <div className="flex items-center gap-2 font-medium leading-none">
-          +12.3% desde el mes pasado <TrendingUp className="h-4 w-4" />
+          {dict.trend} <TrendingUp className="h-4 w-4" />
         </div>
         <div className="leading-none text-muted-foreground">
-          Mejora en la finalización de proyectos
+          {dict.description}
         </div>
       </div>
     </div>

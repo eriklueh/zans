@@ -3,6 +3,7 @@
 import { Moon, Sun, Languages } from "lucide-react"
 import { useTheme } from "next-themes"
 import { useRouter, usePathname } from "next/navigation"
+import { useEffect, useState } from "react"
 import {
   SidebarGroup,
   SidebarMenu,
@@ -14,7 +15,12 @@ export function NavSettings() {
   const { theme, setTheme } = useTheme()
   const router = useRouter()
   const pathname = usePathname()
+  const [mounted, setMounted] = useState(false)
   const currentLang = pathname.split('/')[1]
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
 
   const toggleTheme = () => {
     setTheme(theme === "dark" ? "light" : "dark")
@@ -24,6 +30,10 @@ export function NavSettings() {
     const newLang = currentLang === "en" ? "es" : "en"
     const newPath = pathname.replace(`/${currentLang}`, `/${newLang}`)
     router.push(newPath)
+  }
+
+  if (!mounted) {
+    return null
   }
 
   return (

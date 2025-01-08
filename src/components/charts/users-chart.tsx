@@ -4,18 +4,25 @@ import { Line, LineChart, CartesianGrid, XAxis, YAxis } from 'recharts'
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart"
 import { useDashboardStore } from "@/store/dashboard-store"
 
-export function UsersChart() {
+interface UsersChartProps {
+  dict: {
+    totalUsers: string
+    activeUsers: string
+  }
+}
+
+export function UsersChart({ dict }: UsersChartProps) {
   const { userStats } = useDashboardStore()
 
   return (
     <ChartContainer
       config={{
         users: {
-          label: 'Total Usuarios',
+          label: dict.totalUsers,
           color: 'hsl(var(--primary))',
         },
         active: {
-          label: 'Usuarios Activos',
+          label: dict.activeUsers,
           color: 'hsl(var(--success))',
         },
       }}
