@@ -6,6 +6,7 @@ import { AudioWaveform, BookOpen, Bot, Command, Frame, GalleryVerticalEnd, Map, 
 import { NavMain } from "@/components/nav-main"
 import { NavProjects } from "@/components/nav-projects"
 import { NavUser } from "@/components/nav-user"
+import { NavSettings } from "@/components/nav-settings"
 import { TeamSwitcher } from "@/components/team-switcher"
 import {
   Sidebar,
@@ -188,6 +189,7 @@ export function AppSidebar({ dict, ...props }: AppSidebarProps) {
       <SidebarContent>
         <NavMain items={data.navMain} dict={dict} />
         <NavProjects projects={data.projects} dict={dict} />
+        <NavSettings />
       </SidebarContent>
       <SidebarFooter>
         <NavUser dict={dict} />

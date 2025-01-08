@@ -1,64 +1,35 @@
-import { getDictionary } from "@/lib/get-dictionary"
-import { AppSidebar } from "@/components/app-sidebar"
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb"
-import { Separator } from "@/components/ui/separator"
-import {
-  SidebarInset,
-  SidebarProvider,
-  SidebarTrigger,
-} from "@/components/ui/sidebar"
-import { getSession } from '@auth0/nextjs-auth0';
-import { redirect } from 'next/navigation';
+import { ProjectsChart } from "@/components/charts/projects-chart"
+import { UsersChart } from "@/components/charts/users-chart"
+import { VisitorsChart } from "@/components/charts/visitors-chart"
+import { ZustandDemo } from "@/components/demo/zustand-demo"
 
-export default async function DashboardPage({ params: { lang } }: { params: { lang: string } }) {
-  const session = await getSession();
-  
-  if (!session) {
-    redirect(`/${lang}`);
-  }
-
-  const dict = await getDictionary(lang as 'en' | 'es')
-
+export default function DashboardPage() {
   return (
-    <SidebarProvider>
-      <AppSidebar dict={dict} />
-      <SidebarInset>
-        <header className="flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12">
-          <div className="flex items-center gap-2 px-4">
-            <SidebarTrigger className="-ml-1" />
-            <Separator orientation="vertical" className="mr-2 h-4" />
-            <Breadcrumb>
-              <BreadcrumbList>
-                <BreadcrumbItem className="hidden md:block">
-                  <BreadcrumbLink href="#">
-                    {dict.buildingYourApp}
-                  </BreadcrumbLink>
-                </BreadcrumbItem>
-                <BreadcrumbSeparator className="hidden md:block" />
-                <BreadcrumbItem>
-                  <BreadcrumbPage>{dict.dataFetching}</BreadcrumbPage>
-                </BreadcrumbItem>
-              </BreadcrumbList>
-            </Breadcrumb>
+    <div className="grid gap-4">
+      {/* Primera fila - Gráficos principales */}
+      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+        <div className="rounded-lg border bg-card p-4 shadow-sm">
+          <div className="mb-4">
+            <h3 className="text-lg font-semibold">Usuarios</h3>
           </div>
-        </header>
-        <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
-          <div className="grid auto-rows-min gap-4 md:grid-cols-3">
-            <div className="aspect-video rounded-xl bg-muted/50" />
-            <div className="aspect-video rounded-xl bg-muted/50" />
-            <div className="aspect-video rounded-xl bg-muted/50" />
-          </div>
-          <div className="min-h-[100vh] flex-1 rounded-xl bg-muted/50 md:min-h-min" />
+          <UsersChart />
         </div>
-      </SidebarInset>
-    </SidebarProvider>
+
+        <div className="rounded-lg border bg-card p-4 shadow-sm">
+          <div className="mb-4">
+            <h3 className="text-lg font-semibold">Visitantes por Navegador</h3>
+          </div>
+          <VisitorsChart />
+        </div>
+
+        <div className="md:col-span-2 lg:col-span-1">
+          <ProjectsChart />
+        </div>
+      </div>
+
+      {/* Segunda fila - Demo de Zustand */}
+      <ZustandDemo />
+    </div>
   )
 }
 
